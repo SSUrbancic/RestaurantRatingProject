@@ -7,15 +7,45 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Add A Restaurant!", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AveragingRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfRatings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuisine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AveragingRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfRatings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RestaurantID }) |
             @Html.ActionLink("Details", "Details", new { id=item.RestaurantID }) |

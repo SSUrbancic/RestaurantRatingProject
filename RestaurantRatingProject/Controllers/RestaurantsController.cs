@@ -33,10 +33,9 @@ namespace RestaurantRatingProject.Controllers
             {
                 return HttpNotFound();
             }
-            //rrvm.Restaurants = restaurant;
             var StarRatings = new List<int>() { 1, 2, 3, 4, 5 };
             restaurant.StarRatings = StarRatings;
-            return View(restaurant); 
+            return View(restaurant);
         }
 
         // GET: Restaurants/Create
@@ -50,22 +49,13 @@ namespace RestaurantRatingProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RestaurantID")] Restaurant restaurant)
+        public ActionResult Create([Bind(Include = "RestaurantID,Name,Cuisine,AveragingRating,NumberOfRatings,Rating")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
-                //List<StarRatings> starRatingList = new List<StarRatings>();
-                //for (int i = 0; i < 5; i++)
-                //{
-                //    var tempStarRating = new StarRatings();
-                //    var tempStarValue = i + 1;
-                //    tempStarRating.NumberOfStars = tempStarValue;
-                //    starRatingList.Add(tempStarRating);
-                //}
-                //restaurant.StarRatings = starRatingList;
-                db.Restaurants.Add(restaurant); 
+                db.Restaurants.Add(restaurant);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Reviews", "Home");
             }
 
             return View(restaurant);
@@ -91,13 +81,13 @@ namespace RestaurantRatingProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RestaurantID")] Restaurant restaurant)
+        public ActionResult Edit([Bind(Include = "RestaurantID,Name,Cuisine,AveragingRating,NumberOfRatings,Rating")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(restaurant).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Reviews", "Home");
             }
             return View(restaurant);
         }
@@ -125,7 +115,7 @@ namespace RestaurantRatingProject.Controllers
             Restaurant restaurant = db.Restaurants.Find(id);
             db.Restaurants.Remove(restaurant);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Reviews", "Home");
         }
 
         protected override void Dispose(bool disposing)

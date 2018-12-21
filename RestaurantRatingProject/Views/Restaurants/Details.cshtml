@@ -41,9 +41,12 @@
     </dl>
 </div>
 
-        @using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
-        {
-            @Html.HiddenFor(modelItem => Model.RestaurantID)
-            <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.StarRatings), "Select Rating")
-            <button type="submit" value="submit">Submit</button>
-        }
+@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(modelItem => Model.RestaurantID)
+    <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.StarRatings), "Select Rating")
+    <button type="submit" value="submit">Submit</button>
+}
+    <div>
+        @Html.ActionLink("Cancel", "Reviews", "Home")
+    </div>
