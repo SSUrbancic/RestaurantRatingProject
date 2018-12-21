@@ -4,7 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/MyStyleSheet.css">
+</head>
+<h2 class="titleHomePage" style="font-family: 'Sofia'">Rate this Restaurant</h2>
 
 <div>
 
@@ -41,12 +45,13 @@
     </dl>
 </div>
 
-@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(modelItem => Model.RestaurantID)
-    <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.StarRatings), "Select Rating")
-    <button type="submit" value="submit">Submit</button>
-}
-    <div>
-        @Html.ActionLink("Cancel", "Reviews", "Home")
-    </div>
+    @using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
+    {
+        @Html.HiddenFor(modelItem => Model.RestaurantID)
+        <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.StarRatings), "Select Rating", new { @class = "btn btn-default dropdown-toggle" })
+            <button type="submit" value="submit" class="submitButton">Submit</button>
+    }
+
+        <div>
+            @Html.ActionLink("Cancel", "Reviews", "Home")
+        </div>

@@ -2,55 +2,57 @@
 @{
     ViewBag.Title = "Reviews";
 }
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/MyStyleSheet.css">
+</head>
+<h2 class="titleHomePage" style="font-family: 'Sofia'">Restaurant Reviews</h2>
 
-<h2>Restaurant Reviews</h2>
-
-<p>
     @Html.ActionLink("Add A Restaurant!", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Name:
-        </th>
-        <th>
-            Cuisine:
-        </th>
-        <th>
-            Number Of Ratings
-        </th>
-        <th>
-            Average Rating:
-        </th>
-    </tr>
 
-    @foreach (var item in Model.Restaurants)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cuisine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfRatings)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AveragingRating)
-            </td>
-            <td>
-                @Html.ActionLink("Rate", "Details", "Restaurants", new { id = item.RestaurantID }, null)
-                @Html.ActionLink("Edit", "Edit", "Restaurants", new { id = item.RestaurantID }, null)
-                @Html.ActionLink("Delete", "Delete", "Restaurants", new { id = item.RestaurantID }, null)
-                @Html.ActionLink("Try With JavaScript", "ReviewsWithJavaScript", "Home", new { restaurantId = item.RestaurantID }, null)
-                @*@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
-        {
-        @Html.HiddenFor(modelItem => item.RestaurantID)
-        <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.Ratings), "Select Rating")
-        <button type="submit" value="submit">Submit</button>
-        }*@
-            </td>
+            <th>
+                Name:
+            </th>
+            <th>
+                Cuisine:
+            </th>
+            <th>
+                Number Of Ratings:
+            </th>
+            <th>
+                Average Rating:
+            </th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model.Restaurants)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cuisine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRatings)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AveragingRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Rate", "Details", "Restaurants", new { id = item.RestaurantID }, null) |
+                    @Html.ActionLink("Edit", "Edit", "Restaurants", new { id = item.RestaurantID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Restaurants", new { id = item.RestaurantID }, null) |
+                    @Html.ActionLink("Try With JavaScript", "ReviewsWithJavaScript", "Home", new { restaurantId = item.RestaurantID }, null)
+                    @*@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
+                        {
+                        @Html.HiddenFor(modelItem => item.RestaurantID)
+                        <p>Star Rating:</p> @Html.DropDownListFor(Model => Model.Rating, new SelectList(Model.Ratings), "Select Rating")
+                        <button type="submit" value="submit">Submit</button>
+                        }*@
+                </td>
+            </tr>
+        }
+    </table>

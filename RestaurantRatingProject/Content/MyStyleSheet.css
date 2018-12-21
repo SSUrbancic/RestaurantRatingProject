@@ -1,0 +1,45 @@
+﻿body {
+    background-color: darkslategray;
+    color: aliceblue;
+}
+
+#myJumbotron{
+    background-color:darkgray;
+}
+#carouselImage1 {
+    height: 300px;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#carouselImage2 {
+    height: 300px;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#carouselImage3 {
+    height: 300px;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.titleHomePage {
+    display: block;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Sofia';
+    padding-bottom: 15px;
+}
+
+.reviewDetails {
+
+}
+.submitButton {
+    color: aliceblue;
+    background-color: darkgray;
+    display: block;
+}
