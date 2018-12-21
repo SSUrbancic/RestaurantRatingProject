@@ -43,6 +43,7 @@
                 @Html.ActionLink("Rate", "Details", "Restaurants", new { id = item.RestaurantID }, null)
                 @Html.ActionLink("Edit", "Edit", "Restaurants", new { id = item.RestaurantID }, null)
                 @Html.ActionLink("Delete", "Delete", "Restaurants", new { id = item.RestaurantID }, null)
+                @Html.ActionLink("Try With JavaScript", "ReviewsWithJavaScript", "Home", new { restaurantId = item.RestaurantID }, null)
                 @*@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
         {
         @Html.HiddenFor(modelItem => item.RestaurantID)

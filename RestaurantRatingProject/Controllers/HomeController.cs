@@ -114,5 +114,18 @@ namespace RestaurantRatingProject.Controllers
             int numberOfRatings = db.Reviews.Where(r => r.RestaurantID == restaurantID).Select(r => r).Count();
             return numberOfRatings;
         }
+
+        public ActionResult ReviewsWithJavaScript(int restaurantId)
+        {
+            var restuarants = db.Restaurants.ToList();
+            return View(restuarants);
+        }
+
     }
 }
+
+
+
+
+
+
