@@ -55,7 +55,7 @@ namespace RestaurantRatingProject.Controllers
                 critic.UserID = currentUserID;
                 db.Critics.Add(critic);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Reviews", "Home");
             }
             return View(critic);
         }

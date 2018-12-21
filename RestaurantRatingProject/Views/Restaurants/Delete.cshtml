@@ -10,10 +10,10 @@
 <div>
     <h4>Restaurant</h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <dl class="dl-horizontal"></dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -21,4 +21,7 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
+    <div>
+        @Html.ActionLink("Cancel", "Reviews", "Home")
+    </div>
 </div>

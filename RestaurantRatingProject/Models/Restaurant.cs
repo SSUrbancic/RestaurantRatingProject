@@ -20,6 +20,9 @@ namespace RestaurantRatingProject.Models
         [Display(Name = "Number Of Ratings")]
         public int? NumberOfRatings { get; set; }
         [Display(Name = "Star Ratings")]
-        public List<StarRatings> StarRatings { get; set; }
+        public List<int> StarRatings { get; set; }
+        [Display(Name = "Star Ratings")]
+        public int? Rating { get; set; }
+
     }
 }

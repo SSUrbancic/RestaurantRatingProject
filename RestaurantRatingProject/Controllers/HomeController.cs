@@ -32,49 +32,51 @@ namespace RestaurantRatingProject.Controllers
         //GET
         public ActionResult Reviews()
         {
-            List<StarRatings> starRatingList = new List<StarRatings>();
-            for (int i = 0; i < 5; i++)
-            {
-                var tempStarRating = new StarRatings();
-                var tempStarValue = i + 1;
-                tempStarRating.NumberOfStars = tempStarValue;
-                starRatingList.Add(tempStarRating);
-            }
-
             var StarRatings = new List<int>() { 1, 2, 3, 4, 5};
             ViewBag.StarRatings = new SelectList(StarRatings);
 
             var restaurants = db.Restaurants.ToList();
-            for (int i = 0; i < restaurants.Count; i++)
-            {
-                restaurants[i].StarRatings = starRatingList;
-            }
+
             RestaurantsRatingViewModel rrvm = new RestaurantsRatingViewModel();
             rrvm.Restaurants = restaurants;
+            rrvm.Ratings = StarRatings;
             return View(rrvm);
         }
         // POST: Transactions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Reviews(RestaurantsRatingViewModel rrvm)
+        public ActionResult Reviews(Restaurant restaurant)
         {
 
-            //var StarRating = starRating.ToString();
-            //var RestaurantID = int.Parse(restaurantID);
-            //var currentUserID = User.Identity.GetUserId();
-            //var currentCritic = db.Critics.Where(x => x.UserID == currentUserID).Select(x => x).First();
-            //var currentRestaurant = db.Restaurants.Where(r => r.RestaurantID == RestaurantID).Select(r => r).First();
-            //var thisReview = FindOrCreateReview(currentCritic.ID, currentRestaurant.RestaurantID);
-            //thisReview.StarRating = int.Parse(starRating.ToString());
-            //var averageRating = DetermineAverageRating(RestaurantID);
-            //currentRestaurant.AveragingRating = averageRating;
-            //db.SaveChanges();
+            var starRating = restaurant.Rating;
+            var RestaurantID = restaurant.RestaurantID;
+            var currentUserID = User.Identity.GetUserId();
+            var currentCritic = db.Critics.Where(x => x.UserID == currentUserID).Select(x => x).First();
+            var currentRestaurant = db.Restaurants.Where(r => r.RestaurantID == RestaurantID).Select(r => r).First();
+            var thisReview = FindOrCreateReview(currentCritic.ID, currentRestaurant.RestaurantID);
+            thisReview.StarRating = starRating.GetValueOrDefault();
+            var averageRating = DetermineAverageRating(RestaurantID);
+            CountReviews(currentRestaurant.RestaurantID);
+            currentRestaurant.AveragingRating = averageRating;
+            db.SaveChanges();
             return RedirectToAction("Reviews");
         }
-        public ActionResult FirstAjax()
+        public void CountReviews(int restaurantID)
         {
-            return Json("chamara", JsonRequestBehavior.AllowGet);
+            var totalReviews = db.Reviews.Count();
+            var reviews = db.Reviews.ToList();
+            var reviewCounter = 0;
+            for (int i = 0; i < totalReviews; i++)
+            {                
+                if(reviews[i].RestaurantID == restaurantID)
+                {
+                    reviewCounter++;
+                }
+            }
+            var restaurant = db.Restaurants.Where(r => r.RestaurantID == restaurantID).Select(r => r).First();
+            restaurant.NumberOfRatings = reviewCounter;
+            db.SaveChanges();
         }
         public Reviews FindOrCreateReview(int criticID, int restaurantID)
         {
@@ -86,7 +88,7 @@ namespace RestaurantRatingProject.Controllers
             catch
             {
                  thisReview = new Reviews();
-
+                 db.Reviews.Add(thisReview);
             }
             thisReview.RestaurantID = restaurantID;
             thisReview.CriticID = criticID;
@@ -97,7 +99,7 @@ namespace RestaurantRatingProject.Controllers
         {
             int sumOfRatings = 0;
             int numberOfRatings = DetermineNumberOfRatings(restaurantID);
-            var tempRatingList = db.Reviews.Where(r => r.RestaurantID == restaurantID).ToList();
+            var tempRatingList = db.Reviews.Where(r => r.RestaurantID == restaurantID).Distinct().ToList();
             
             for (int i = 0; i < numberOfRatings; i++)
             {

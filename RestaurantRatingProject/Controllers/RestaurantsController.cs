@@ -23,6 +23,7 @@ namespace RestaurantRatingProject.Controllers
         // GET: Restaurants/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -32,7 +33,10 @@ namespace RestaurantRatingProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(restaurant);
+            //rrvm.Restaurants = restaurant;
+            var StarRatings = new List<int>() { 1, 2, 3, 4, 5 };
+            restaurant.StarRatings = StarRatings;
+            return View(restaurant); 
         }
 
         // GET: Restaurants/Create
