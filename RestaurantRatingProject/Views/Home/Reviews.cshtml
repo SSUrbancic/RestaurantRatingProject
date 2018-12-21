@@ -1,0 +1,62 @@
+﻿@*@model IEnumerable<RestaurantRatingProject.Models.Restaurant>*@
+@model RestaurantRatingProject.Models.RestaurantsRatingViewModel
+
+
+@{
+    ViewBag.Title = "Reviews";
+
+}
+<h2>Restaurants</h2>
+
+<table class="table">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AveragingRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfRatings)
+        </th>
+    </tr>*@
+
+    @foreach (var item in Model.Restaurants)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cuisine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AveragingRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfRatings)
+            </td>
+            <td>
+                @*@using (Html.BeginForm("Reviews", "Home", FormMethod.Post))
+            {
+                @Html.HiddenFor(modelItem => item.RestaurantID)
+                @Html.DropDownListFor(model => model.Rating, ViewBag.)
+                <p>Star Rating:</p> @Html.DropDownListFor(modelItem => modelItem.Rating, ViewBag.StarRatings)
+
+        <p>Star Rating:</p> @Html.DropDownListFor(modelItem => item.StarRatings, Model.DocumentCategoryTypeList.MakeSelection(Model.DocumentCategoryType)
+
+                <button type="submit" value="submit">Submit</button>
+            }*@
+
+                @Html.ActionLink("Rate", "Details", "Restaurants")
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+
+
+
